@@ -96,15 +96,12 @@ class Mhs extends CI_Controller
   public function edit($nim)
   {
     if (!empty($_POST)) {
-      var_dump($_POST['sel']);
-      die;
       $this->form_validation->set_rules('nama', 'Nama', 'trim|required');
       $this->form_validation->set_rules('tgl_lahir', 'Tanggal Lahir', 'trim|required');
       $this->form_validation->set_rules('prodi', 'Prodi', 'trim|required');
       $this->form_validation->set_rules('nohp', 'No. HP', 'trim|required|numeric');
       $this->form_validation->set_rules('email', 'Email', 'trim|required|valid_email');
       $this->form_validation->set_rules('alamat', 'Alamat', 'trim|required');
-
       
       if ($this->form_validation->run() == true) {
         $nama = htmlspecialchars($this->input->post('nama', true));

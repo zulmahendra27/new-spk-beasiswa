@@ -50,15 +50,15 @@
         </a>
       </li>
       <li class="nav-item">
-        <a class="nav-link" href="#">
-          <span data-feather="file-text"></span>
-          Last quarter
+        <a class="nav-link <?= $root=='kriteria'?'active':'' ?>" href="<?= base_url('kriteria') ?>">
+          <span data-feather="bookmark"></span>
+          Kriteria
         </a>
       </li>
       <li class="nav-item">
-        <a class="nav-link" href="#">
-          <span data-feather="file-text"></span>
-          Social engagement
+        <a class="nav-link <?= $root=='seleksi'?'active':'' ?>" href="<?= base_url('seleksi') ?>">
+          <span data-feather="shuffle"></span>
+          Seleksi
         </a>
       </li>
       <li class="nav-item">
