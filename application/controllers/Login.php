@@ -20,13 +20,11 @@ defined('BASEPATH') or exit('No direct script access allowed');
 
 class Login extends CI_Controller
 {
-    
   public function __construct()
   {
     parent::__construct();
     is_login();
     $this->load->model('Login_model');
-    
   }
 
   public function index()
@@ -45,10 +43,13 @@ class Login extends CI_Controller
           $password = htmlspecialchars($this->input->post('password', true));
           $pw = $data->row()->password;
           if (password_verify($password, $pw)) {
-            
-            
+            $level = array(
+              1 => 'admin'
+            );
+
             $array = array(
-              'login' => true
+              'login' => true,
+              'level' => $level[$data->row()->level]
             );
             
             $this->session->set_userdata( $array );
