@@ -6,6 +6,26 @@
 <?php if ($this->session->flashdata('alt')): ?>
 <div class="alert alert-<?= $this->session->flashdata('alt') ?>"><?= $this->session->flashdata('msg') ?></div>
 <?php endif; ?>
+<div class="card bg-info">
+  <div class="card-header">
+    <div class="row">
+      <div class="col-lg-2">
+        <h5>Nama Kriteria</h5>
+      </div>
+      <div class="col-lg-10">
+        <h5>: Test</h5>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-lg-2">
+        <h5>Bobot</h5>
+      </div>
+      <div class="col-lg-10">
+        <h5>: 10</h5>
+      </div>
+    </div>
+  </div>
+</div>
 <div class="table-responsive">
   <table class="table table-striped table-sm text-center">
     <thead>

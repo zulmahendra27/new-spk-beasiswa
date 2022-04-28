@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost:3306
--- Generation Time: Apr 28, 2022 at 06:05 AM
+-- Generation Time: Apr 28, 2022 at 06:45 AM
 -- Server version: 5.7.33
 -- PHP Version: 7.4.19
 
@@ -77,8 +77,20 @@ INSERT INTO `mhs` (`id_mhs`, `nim`, `nama`, `tgl_lahir`, `prodi`, `nohp`, `email
 CREATE TABLE `seleksi` (
   `id_seleksi` int(11) NOT NULL,
   `id_mhs` int(11) NOT NULL,
+  `id_subkriteria` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `subkriteria`
+--
+
+CREATE TABLE `subkriteria` (
+  `id_subkriteria` int(11) NOT NULL,
   `id_kriteria` int(11) NOT NULL,
-  `nilai` int(11) NOT NULL
+  `nama_sub` int(11) NOT NULL,
+  `bobot` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
@@ -125,6 +137,12 @@ ALTER TABLE `seleksi`
   ADD PRIMARY KEY (`id_seleksi`);
 
 --
+-- Indexes for table `subkriteria`
+--
+ALTER TABLE `subkriteria`
+  ADD PRIMARY KEY (`id_subkriteria`);
+
+--
 -- Indexes for table `user`
 --
 ALTER TABLE `user`
@@ -151,6 +169,12 @@ ALTER TABLE `mhs`
 --
 ALTER TABLE `seleksi`
   MODIFY `id_seleksi` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT for table `subkriteria`
+--
+ALTER TABLE `subkriteria`
+  MODIFY `id_subkriteria` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `user`
