@@ -48,13 +48,13 @@ class Kriteria_model extends CI_Model {
 
   public function update($data, $where)
   {
-    $this->db->where('kriteria', $where);
+    $this->db->where('id_kriteria', $where);
     return $this->db->update('kriteria', $data);
   }
 
   public function delete($id)
   {
-    $this->db->where('kriteria', $id);
+    $this->db->where('id_kriteria', $id);
     return $this->db->delete('kriteria');
   }
 

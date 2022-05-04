@@ -1,5 +1,6 @@
+<?php if ($result->num_rows()): $kriteria = $result->row(); ?>
 <div class="form-group">
-  <a href="<?= base_url('kriteria/add') ?>" class="btn btn-success mb-3">
+  <a href="<?= base_url('subkriteria/add/'.$kriteria->id_kriteria) ?>" class="btn btn-success mb-3">
     <span data-feather="plus"></span> Tambah Data
   </a>
 </div>
@@ -13,7 +14,7 @@
         <h5>Nama Kriteria</h5>
       </div>
       <div class="col-lg-10">
-        <h5>: Test</h5>
+        <h5>: <?= $kriteria->nama; ?></h5>
       </div>
     </div>
     <div class="row">
@@ -21,7 +22,7 @@
         <h5>Bobot</h5>
       </div>
       <div class="col-lg-10">
-        <h5>: 10</h5>
+        <h5>: <?= $kriteria->bobot; ?></h5>
       </div>
     </div>
   </div>
@@ -37,21 +38,19 @@
       </tr>
     </thead>
     <tbody>
-      <?php if ($result->num_rows()): $i = 1; foreach ($result->result() as $kriteria): ?>
+      <?php if ($kriteria->id_subkriteria != null): $i = 1; foreach ($result->result() as $subkriteria): ?>
       <tr>
         <td><?= $i ?></td>
-        <td><?= $kriteria->nama ?></td>
-        <td><?= $kriteria->bobot ?></td>
+        <td><?= htmlspecialchars_decode($subkriteria->nama_sub) ?></td>
+        <td><?= $subkriteria->bobot_sub ?></td>
         <td>
-          <a href="<?= base_url('kriteria/edit/'.$kriteria->id_kriteria) ?>" class="btn btn-sm btn-primary">
+          <a href="<?= base_url('subkriteria/edit/'.$subkriteria->id_kriteria.'/'.$subkriteria->id_subkriteria) ?>"
+            class="btn btn-sm btn-primary">
             <span data-feather="edit"></span>
           </a>
-          <a href="<?= base_url('kriteria/delete/'.$kriteria->id_kriteria) ?>" class="btn btn-sm btn-danger"
-            onclick="return confirm('Hapus data?')">
+          <a href="<?= base_url('subkriteria/delete/'.$subkriteria->id_kriteria.'/'.$subkriteria->id_subkriteria) ?>"
+            class="btn btn-sm btn-danger" onclick="return confirm('Hapus data?')">
             <span data-feather="delete"></span>
-          </a>
-          <a href="<?= base_url('subkriteria/'.$kriteria->id_kriteria) ?>" class="btn btn-sm btn-warning">
-            <span data-feather="book-open"></span>
           </a>
         </td>
       </tr>
@@ -63,3 +62,4 @@
     </tbody>
   </table>
 </div>
+<?php else: echo "<script>alert('Data tidak ditemukan');</script>"; echo "<script>window.location.href='".base_url('kriteria')."';</script>"; endif; ?>
