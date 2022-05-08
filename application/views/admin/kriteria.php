@@ -13,6 +13,7 @@
         <th scope="col">#</th>
         <th scope="col">Nama</th>
         <th scope="col">Bobot</th>
+        <th scope="col">Type</th>
         <th scope="col">Action</th>
       </tr>
     </thead>
@@ -22,6 +23,7 @@
         <td><?= $i ?></td>
         <td><?= $kriteria->nama ?></td>
         <td><?= $kriteria->bobot ?></td>
+        <td><?= ucwords($kriteria->type) ?></td>
         <td>
           <a href="<?= base_url('kriteria/edit/'.$kriteria->id_kriteria) ?>" class="btn btn-sm btn-primary">
             <span data-feather="edit"></span>

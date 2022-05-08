@@ -31,12 +31,25 @@ class Seleksi_model extends CI_Model {
   // ------------------------------------------------------------------------
   public function getAll()
   {
-    $this->db->select('a.*, b.*, c.*, c.nama as nama_mhs');
+    $this->db->select('a.*, b.*, c.type');
     $this->db->from('seleksi a');
-    $this->db->join('kriteria b', 'a.id_kriteria = b.id_kriteria', 'left');
-    $this->db->join('mhs c', 'a.id_mhs = c.id_mhs', 'left');
-    $this->db->order_by('c.nama', 'asc');
+    $this->db->join('subkriteria b', 'a.id_subkriteria = b.id_subkriteria');
+    $this->db->join('kriteria c', 'b.id_kriteria = c.id_kriteria');
+    $this->db->order_by('c.id_kriteria', 'asc');
     return $this->db->get();
+  }
+
+  public function getMhs($id)
+  {
+    $this->db->where_in('id_mhs', $id);
+    return $this->db->get('mhs');
+  }
+
+  public function getMhsInSeleksi()
+  {
+    // $this->db->distinct();
+    $this->db->select('DISTINCT(id_mhs)');
+    return $this->db->get('seleksi');
   }
 
   public function getById($id)
@@ -44,9 +57,21 @@ class Seleksi_model extends CI_Model {
     return $this->db->get_where('seleksi', ['id_seleksi' => $id]);
   }
 
+  public function getMaxMin()
+  {
+    // $this->db->select('MAX(bobot_sub), MIN(bobot_sub)');
+    $this->db->select_max('a.bobot_sub', 'max_bobot');
+    $this->db->select_min('a.bobot_sub', 'min_bobot');
+    $this->db->select('a.id_kriteria, b.type');
+    $this->db->from('subkriteria a');
+    $this->db->join('kriteria b', 'a.id_kriteria = b.id_kriteria');
+    $this->db->group_by('id_kriteria');
+    return $this->db->get('subkriteria');
+  }
+
   public function insert($data)
   {
-    return $this->db->insert('seleksi', $data);
+    return $this->db->insert_batch('seleksi', $data);
   }
 
   public function update($data, $where)

@@ -1,27 +1,38 @@
 <form method="post">
   <div class="mb-2 row">
-    <label for="Nama" class="col-lg-2 col-form-label">Nama</label>
+    <label for="mhs" class="col-lg-2 col-form-label">Nama Mahasiswa</label>
     <div class="col-lg-3">
-      <input type="text" class="form-control" id="nama" name="nama" required value="<?= set_value('nama') ?>">
+      <select name="mhs" id="mhs" class="form-control">
+        <?php foreach ($rs_mhs->result() as $mhs): ?>
+        <option value="<?= $mhs->id_mhs; ?>"><?= $mhs->nama; ?></option>
+        <?php endforeach; ?>
+      </select>
     </div>
     <div class="col-auto">
       <span class="form-text">
-        <?= form_error('nama') ?>
+        <?= form_error('mhs') ?>
       </span>
     </div>
   </div>
 
+  <?php foreach ($rs_kriteria->result() as $kriteria): ?>
   <div class="mb-2 row">
-    <label for="bobot" class="col-lg-2 col-form-label">Bobot</label>
+    <label class="col-lg-2 col-form-label"><?= $kriteria->nama; ?></label>
     <div class="col-lg-3">
-      <input type="number" class="form-control" id="bobot" name="bobot" required value="<?= set_value('bobot') ?>">
+      <select name="kriteria[]" class="form-control">
+        <?php foreach ($rs_subkriteria->result() as $subkriteria): if ($subkriteria->id_kriteria == $kriteria->id_kriteria): ?>
+        <option value="<?= $subkriteria->id_subkriteria; ?>"><?= htmlspecialchars_decode($subkriteria->nama_sub); ?>
+        </option>
+        <?php endif; endforeach; ?>
+      </select>
     </div>
     <div class="col-auto">
       <span class="form-text">
-        <?= form_error('bobot') ?>
+        <?= form_error('kriteria') ?>
       </span>
     </div>
   </div>
+  <?php endforeach; ?>
 
   <div class="mb-2 row">
     <div class="col-lg-2"></div>

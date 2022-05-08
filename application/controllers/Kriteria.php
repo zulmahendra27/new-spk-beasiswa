@@ -45,14 +45,17 @@ class Kriteria extends CI_Controller
     if (!empty($_POST)) {
       $this->form_validation->set_rules('nama', 'Nama', 'trim|required');
       $this->form_validation->set_rules('bobot', 'Bobot', 'trim|required|numeric');
+      $this->form_validation->set_rules('type', 'Type', 'trim|required');
       
       if ($this->form_validation->run() == true) {
         $nama = htmlspecialchars($this->input->post('nama', true));
         $bobot = htmlspecialchars($this->input->post('bobot', true));
+        $type = htmlspecialchars($this->input->post('type', true));
 
         $data = array(
           'nama' => $nama,
-          'bobot' => $bobot
+          'bobot' => $bobot,
+          'type' => $type,
         );
 
         $result = $this->Kriteria_model->insert($data);
@@ -82,14 +85,17 @@ class Kriteria extends CI_Controller
     if (!empty($_POST)) {
       $this->form_validation->set_rules('nama', 'Nama', 'trim|required');
       $this->form_validation->set_rules('bobot', 'Bobot', 'trim|required|numeric');
+      $this->form_validation->set_rules('type', 'Type', 'trim|required');
       
       if ($this->form_validation->run() == true) {
         $nama = htmlspecialchars($this->input->post('nama', true));
         $bobot = htmlspecialchars($this->input->post('bobot', true));
+        $type = htmlspecialchars($this->input->post('type', true));
 
         $data = array(
           'nama' => $nama,
-          'bobot' => $bobot
+          'bobot' => $bobot,
+          'type' => $type,
         );
 
         $result = $this->Kriteria_model->update($data, $id);

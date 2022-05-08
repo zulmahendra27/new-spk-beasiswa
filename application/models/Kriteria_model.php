@@ -32,7 +32,6 @@ class Kriteria_model extends CI_Model {
   
   public function getAll()
   {
-    $this->db->order_by('bobot', 'desc');
     return $this->db->get('kriteria');
   }
 

@@ -40,6 +40,12 @@ class Mhs_model extends CI_Model {
     return $this->db->get_where('mhs', ['nim' => $id]);
   }
 
+  public function getByWhereIn($id)
+  {
+    $this->db->where_in('id_mhs', $id);
+    return $this->db->get('mhs');
+  }
+
   public function insert($data)
   {
     return $this->db->insert('mhs', $data);
