@@ -24,17 +24,54 @@ class Dashboard extends CI_Controller
   {
     parent::__construct();
     is_not_login();
+    $this->load->model('Seleksi_model');
   }
 
   public function index()
   {
+    $rs_mhs = $this->Seleksi_model->getMhsInSeleksi();
+    $rs_kriteria = $this->Seleksi_model->getKriteria();
+    $rs_seleksi = $this->Seleksi_model->getAll();
+
+    $arr_pref = array(array());
+
+    if ($rs_mhs->num_rows()) {
+      foreach ($rs_mhs->result() as $key => $mhs) {
+        $nilai = 0;
+        $arr_pref[$key][0] = $mhs->nama;
+
+        foreach ($rs_seleksi->result() as $seleksi) {
+          if ($seleksi->id_mhs == $mhs->id_mhs) {
+            foreach ($rs_kriteria->result() as $kriteria) {
+              if ($kriteria->id_kriteria == $seleksi->id_kriteria) {
+                if ($kriteria->type == 'benefit') {
+                  $normal = $seleksi->bobot_sub / $kriteria->max_bobot;
+                } else {
+                  $normal = $kriteria->min_bobot / $seleksi->bobot_sub;
+                }
+
+                $kali = $normal * $kriteria->bobot;
+                $nilai += $kali;
+              }
+            }
+          }
+        }
+        
+        $arr_pref[$key][1] = $nilai;
+      }
+    }
+
+    $pref = array_column($arr_pref, 1);
+    array_multisort($pref, SORT_DESC, $arr_pref);
+
     $data = array(
       'page' => 'dashboard',
       'title' => 'Dashboard',
-      'root' => 'dashboard'
+      'root' => 'dashboard',
+      'preferensi' => $arr_pref,
     );
+
     $this->load->view('page', $data);
-    
   }
 
 }

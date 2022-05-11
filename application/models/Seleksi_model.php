@@ -47,9 +47,10 @@ class Seleksi_model extends CI_Model {
 
   public function getMhsInSeleksi()
   {
-    // $this->db->distinct();
-    $this->db->select('DISTINCT(id_mhs)');
-    return $this->db->get('seleksi');
+    $this->db->select('DISTINCT(a.id_mhs), b.*');
+    $this->db->from('seleksi a');
+    $this->db->join('mhs b', 'a.id_mhs = b.id_mhs');
+    return $this->db->get();
   }
 
   public function getById($id)
@@ -57,15 +58,14 @@ class Seleksi_model extends CI_Model {
     return $this->db->get_where('seleksi', ['id_seleksi' => $id]);
   }
 
-  public function getMaxMin()
+  public function getKriteria()
   {
-    // $this->db->select('MAX(bobot_sub), MIN(bobot_sub)');
     $this->db->select_max('a.bobot_sub', 'max_bobot');
     $this->db->select_min('a.bobot_sub', 'min_bobot');
-    $this->db->select('a.id_kriteria, b.type');
+    $this->db->select('b.*');
     $this->db->from('subkriteria a');
     $this->db->join('kriteria b', 'a.id_kriteria = b.id_kriteria');
-    $this->db->group_by('id_kriteria');
+    $this->db->group_by('a.id_kriteria');
     return $this->db->get('subkriteria');
   }
 
@@ -74,15 +74,9 @@ class Seleksi_model extends CI_Model {
     return $this->db->insert_batch('seleksi', $data);
   }
 
-  public function update($data, $where)
-  {
-    $this->db->where('seleksi', $where);
-    return $this->db->update('seleksi', $data);
-  }
-
   public function delete($id)
   {
-    $this->db->where('seleksi', $id);
+    $this->db->where('id_mhs', $id);
     return $this->db->delete('seleksi');
   }
 
