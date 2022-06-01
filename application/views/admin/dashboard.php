@@ -19,14 +19,16 @@
       </tr>
     </thead>
     <tbody>
-      <?php $i=1; foreach ($preferensi as $pref): ?>
+      <?php $i = 1;
+      foreach ($preferensi as $pref) : ?>
       <tr>
         <td><?= $i; ?></td>
         <td><?= $pref[0]; ?></td>
-        <td><?= $pref[1]; ?></td>
+        <td><?= number_format($pref[1], 2, ',', '.'); ?></td>
         <td><?= $i; ?></td>
       </tr>
-      <?php $i++; endforeach; ?>
+      <?php $i++;
+      endforeach; ?>
     </tbody>
   </table>
 </div>
