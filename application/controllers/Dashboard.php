@@ -33,7 +33,7 @@ class Dashboard extends CI_Controller
     $rs_kriteria = $this->Seleksi_model->getKriteria();
     $rs_seleksi = $this->Seleksi_model->getAll();
 
-    $arr_pref = array(array());
+    $arr_pref = array();
 
     if ($rs_mhs->num_rows()) {
       foreach ($rs_mhs->result() as $key => $mhs) {
@@ -56,13 +56,18 @@ class Dashboard extends CI_Controller
             }
           }
         }
-        
+
         $arr_pref[$key][1] = $nilai;
       }
     }
 
     $pref = array_column($arr_pref, 1);
-    array_multisort($pref, SORT_DESC, $arr_pref);
+    if (count($pref) > 0) {
+      array_multisort($pref, SORT_DESC, $arr_pref);
+    }
+
+    // print_r($arr_pref);
+    // die;
 
     $data = array(
       'page' => 'dashboard',
@@ -73,7 +78,6 @@ class Dashboard extends CI_Controller
 
     $this->load->view('page', $data);
   }
-
 }
 
 

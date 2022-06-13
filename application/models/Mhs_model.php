@@ -1,5 +1,5 @@
 <?php
-defined('BASEPATH') OR exit('No direct script access allowed');
+defined('BASEPATH') or exit('No direct script access allowed');
 
 /**
  *
@@ -16,7 +16,8 @@ defined('BASEPATH') OR exit('No direct script access allowed');
  *
  */
 
-class Mhs_model extends CI_Model {
+class Mhs_model extends CI_Model
+{
 
   // ------------------------------------------------------------------------
 
@@ -43,6 +44,12 @@ class Mhs_model extends CI_Model {
   public function getByWhereIn($id)
   {
     $this->db->where_in('id_mhs', $id);
+    return $this->db->get('mhs');
+  }
+
+  public function getNotInSeleksi($id)
+  {
+    $this->db->where_not_in('id_mhs', $id);
     return $this->db->get('mhs');
   }
 

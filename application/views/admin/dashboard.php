@@ -20,15 +20,20 @@
     </thead>
     <tbody>
       <?php $i = 1;
-      foreach ($preferensi as $pref) : ?>
-      <tr>
-        <td><?= $i; ?></td>
-        <td><?= $pref[0]; ?></td>
-        <td><?= number_format($pref[1], 2, ',', '.'); ?></td>
-        <td><?= $i; ?></td>
-      </tr>
-      <?php $i++;
-      endforeach; ?>
+      if (count($preferensi) > 0) : foreach ($preferensi as $pref) : ?>
+          <tr>
+            <td><?= $i; ?></td>
+            <td><?= $pref[0]; ?></td>
+            <td><?= number_format($pref[1], 2, ',', '.'); ?></td>
+            <td><?= $i; ?></td>
+          </tr>
+        <?php $i++;
+        endforeach;
+      else : ?>
+        <tr>
+          <td colspan="4">Tidak ada data</td>
+        </tr>
+      <?php endif; ?>
     </tbody>
   </table>
 </div>
