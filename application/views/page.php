@@ -11,8 +11,6 @@
 
   <link rel="canonical" href="https://getbootstrap.com/docs/5.1/examples/dashboard/">
 
-
-
   <!-- Bootstrap core CSS -->
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet"
     integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
@@ -31,7 +29,8 @@
     </button>
     <div class="navbar-nav">
       <div class="nav-item text-nowrap">
-        <a class="nav-link px-3" href="#">Log out</a>
+        <a class="nav-link px-3" href="<?= base_url('logout'); ?>" onclick="return confirm('Keluar dari sesi?')">Log
+          out</a>
       </div>
     </div>
   </header>
