@@ -64,6 +64,7 @@ class Seleksi extends CI_Controller
               }
 
               $arr_normalisasi[$key][1][$i] = $normal;
+              $arr_normalisasi[$key][2][$i] = $seleksi->bobot_sub;
 
               $i++;
             }
